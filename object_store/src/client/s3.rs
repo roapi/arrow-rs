@@ -46,6 +46,7 @@ impl TryFrom<ListResponse> for ListResult {
         let objects = value
             .contents
             .into_iter()
+            .filter(|p| !p.key.ends_with("/"))
             .map(TryFrom::try_from)
             .collect::<Result<_>>()?;
 
